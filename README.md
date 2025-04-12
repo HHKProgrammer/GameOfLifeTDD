@@ -1,6 +1,16 @@
-# New JavaScript Project
+# Game Of Life
+A conways Game of life simulation in an Test-Driven-Development
+## Features
+reads pattern files in .rle
+simutlates any number of generations
+outputs final result in rle file
+## usage
+node src/main.mjs <input.rle> <generation> <output.rle>
 
-An empty project with JavaScript testing tools preconfigured. Do whatever you like with it.
+## video
+link:
+
+
 
 ## Prerequisites
 
