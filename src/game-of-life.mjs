@@ -48,3 +48,41 @@ function countLiveNeighbors(grid, x, y) {
   return count;
 
 }
+
+export function parseRLE(rleText){
+  const lines = rleText
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line && !line.startsWith('#'));
+
+  const patternLine = lines.find(line => line.startsWith('x ='));
+  const patternIndex = lines.indexOf(patternLine);
+  const dataLines =lines.slice(patternIndex + 1);
+  const data = dataLines.join('');
+
+  const grid = [];
+  let row= [];
+  let count = '';
+  for (let char of data){
+  if (/\d/.test(char)){
+    count += char;
+  } else{
+    const n = parseInt(count || '1', 10);
+    if (char === 'b'){
+      row.push(...Array(n).fill(false));
+    } else if (char === 'o'){
+      row.push(...Array(n).fill(true));
+    } else if (char === '$'){
+      grid.push(row);
+      row = [];
+    } else if ( char === '!'){
+      if (row.length > 0) grid.push(row);
+      break;
+    }
+    count ='';
+  }
+
+
+}
+  return grid;
+}

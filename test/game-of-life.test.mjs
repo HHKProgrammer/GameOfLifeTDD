@@ -1,6 +1,6 @@
 import { describe, test } from "vitest";
 import {expect} from 'chai';
-import { nextCellState, nextGeneration } from '../src/game-of-life.mjs';
+import { nextCellState, nextGeneration, parseRLE } from '../src/game-of-life.mjs';
 
 describe("nextCellState", () => {
   test("Live cell with 2 neighbors stays alive", () => {
@@ -49,3 +49,19 @@ describe("nextGeneration", () => {
     expect(nextGeneration(blinker)).to.deep.equal(expected);
   })
 })
+
+describe("parseRLE", () =>{
+  test("parse single row Blinker pattern",() =>{
+    const rle = `
+    #Blinker
+    x = 3, y = 1, rule = B3/S23
+    3o!`;
+
+    const expected = [
+      [true, true, true]
+    ];
+
+    expect(parseRLE(rle)).to.deep.equal(expected);
+
+  });
+});
