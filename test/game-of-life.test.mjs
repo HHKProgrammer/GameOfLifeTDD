@@ -1,6 +1,6 @@
 import { describe, test } from "vitest";
 import {expect} from 'chai';
-import { nextCellState, nextGeneration, parseRLE } from '../src/game-of-life.mjs';
+import { nextCellState, nextGeneration, parseRLE, gridToRLE } from '../src/game-of-life.mjs';
 
 describe("nextCellState", () => {
   test("Live cell with 2 neighbors stays alive", () => {
@@ -65,3 +65,16 @@ describe("parseRLE", () =>{
 
   });
 });
+describe ("gridToRLE", () => {
+  test("converts 2 x 4 grid to RLe format", () =>{
+    const grid = [
+      [false, true, true, false],
+      [true, false, false, true],
+    ];
+    const expected = `x = 4, y = 2, rule = B3/S23
+b2ob$
+o2bo!`;
+    expect(gridToRLE(grid)).to.equal(expected);
+  });
+});
+

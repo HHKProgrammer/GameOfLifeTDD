@@ -86,3 +86,44 @@ export function parseRLE(rleText){
 }
   return grid;
 }
+
+export function gridToRLE(grid){
+  const height = grid.length;
+  const width = grid[0].length;
+  let rle = "";
+  for (let y = 0; y < height; y++){
+    let count = 0;
+    let last = null;
+
+    for (let x = 0; x < width; x++){
+      const cell = grid[y][x];
+      const symbol = cell ? 'o' : 'b';
+
+      if(symbol === last){
+        count++;
+      }else{
+        if(last !== null){
+          rle += (count > 1 ? count : "") + last;
+
+        }
+        last = symbol;
+        count = 1;
+      }
+    }
+    if ( last !== null){
+      rle += (count > 1 ? count : "") + last;
+
+    }
+    if(y < height - 1){
+      rle += "$\n";
+    }else{
+      rle += "!";
+    }
+    //  += "$\n";
+  }
+ // rle = rle.slice(0, -1) +"!";
+  const header = `x = ${width}, y = ${height}, rule = B3/S23`;
+
+  return `${header}\n${rle}`;
+
+}
