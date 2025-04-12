@@ -3,6 +3,7 @@
   "version": "1.0.0-SNAPSHOT",
   "description": "TODO",
   "license": "TODO",
+  "type": "module",
   "private": true,
   "dependencies": {
     "lodash": "^4.17.21"
